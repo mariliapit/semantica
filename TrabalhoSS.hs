@@ -46,8 +46,6 @@ aSmallStep (Mul (Num x) e2, s) = let (ef,_) = aSmallStep (e2, s)
 aSmallStep (Mul e1 e2,s)  = let (ef,_) = aSmallStep (e1, s)
                             in (Mul ef e2,s)
 
-
-
 interpretA :: (AExp,Estado) -> (AExp,Estado)
 interpretA (a, s) = if isFinalA a then (a, s) else interpretA (aSmallStep (a, s))
 
@@ -154,7 +152,7 @@ exemplo6 :: CExp
 exemplo6 = RepeatUntil (Atrib (Var "x") (Som (Var "x") (Num 2))) (Ig (Var "x") (Num 10))
 
 exemplo7 :: CExp
-exemplo7 = (While (Ig (Var "x") (Num 0)) (Atrib (Var "x") (Num 1)))
+exemplo7 = (While (Not (Ig (Var "x") (Num 5))) (Atrib (Var "x") (Som (Var "x") (Num 1))))
 
 exemplo8 :: CExp
 exemplo8 = For (Var "x") (Num 2) (Num 10) (Seq (Atrib (Var "y") (Som (Var "y") (Num 1))) (Atrib (Var "x") (Som (Var "x") (Num 1))))
